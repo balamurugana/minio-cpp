@@ -13,21 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-list(APPEND SRCS args.cc baseclient.cc client.cc http.cc request.cc response.cc select.cc signer.cc types.cc utils.cc)
+list(APPEND SOURCES args.cc baseclient.cc client.cc http.cc request.cc response.cc select.cc signer.cc types.cc utils.cc)
 
-add_library(miniocpp STATIC ${SRCS})
+add_library(miniocpp STATIC ${SOURCES})
+add_library(miniocpp::miniocpp ALIAS miniocpp)
 target_link_libraries(miniocpp ${requiredlibs})
 
 list(APPEND S3CLIENT_INSTALL_LIST miniocpp)
 
-SET_TARGET_PROPERTIES(miniocpp PROPERTIES 
-  VERSION ${MINIOCPP_MAJOR_VERSION}.${MINIOCPP_MINOR_VERSION}.${MINIOCPP_PATCH_VERSION}
-  CLEAN_DIRECT_OUTPUT 1
-)
+set_target_properties(miniocpp PROPERTIES
+  VERSION ${PROJECT_VERSION}
+  SOVERSION 1
+  CLEAN_DIRECT_OUTPUT 1)
 
 # install the library
-INSTALL(TARGETS ${S3CLIENT_INSTALL_LIST}
+install(TARGETS ${S3CLIENT_INSTALL_LIST}
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
-)
+  ARCHIVE DESTINATION lib)

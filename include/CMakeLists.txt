@@ -13,22 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-INCLUDE (CheckIncludeFiles)
-INCLUDE (CheckFunctionExists)
+include(CheckIncludeFiles)
+include(CheckFunctionExists)
 
-CHECK_INCLUDE_FILES(inttypes.h    HAVE_INTTYPES_H)
-CHECK_INCLUDE_FILES(stdint.h      HAVE_STDINT_H)
-CHECK_INCLUDE_FILES(stdlib.h      HAVE_STDLIB_H)
-CHECK_INCLUDE_FILES(limits.h      HAVE_LIMITS_H)
-CHECK_INCLUDE_FILES(sys/types.h   HAVE_SYS_TYPES_H)
+check_include_files(inttypes.h    HAVE_INTTYPES_H)
+check_include_files(stdint.h      HAVE_STDINT_H)
+check_include_files(stdlib.h      HAVE_STDLIB_H)
+check_include_files(limits.h      HAVE_LIMITS_H)
+check_include_files(sys/types.h   HAVE_SYS_TYPES_H)
 
-CHECK_FUNCTION_EXISTS(strtoimax   HAVE_STRTOIMAX_F)
-CHECK_FUNCTION_EXISTS(strptime    HAVE_STRPTIME_F)
+check_function_exists(strtoimax   HAVE_STRTOIMAX_F)
+check_function_exists(strptime    HAVE_STRPTIME_F)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/config.h @ONLY)
 
-# install all the headers
-FILE(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
-INSTALL(FILES ${files} DESTINATION include/miniocpp)
-
-INSTALL(FILES DESTINATION include)
+file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
+install(FILES ${files} DESTINATION include/miniocpp)
+install(FILES DESTINATION include)

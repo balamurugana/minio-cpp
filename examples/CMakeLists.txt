@@ -1,154 +1,152 @@
-SET(S3_LIBS ${requiredlibs})
+add_executable(MakeBucket MakeBucket.cc)
+target_link_libraries(MakeBucket miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(MakeBucket MakeBucket.cc)
-TARGET_LINK_LIBRARIES(MakeBucket miniocpp ${S3_LIBS})
+add_executable(RemoveBucket RemoveBucket.cc)
+target_link_libraries(RemoveBucket miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(RemoveBucket RemoveBucket.cc)
-TARGET_LINK_LIBRARIES(RemoveBucket miniocpp ${S3_LIBS})
+add_executable(BucketExists BucketExists.cc)
+target_link_libraries(BucketExists miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(BucketExists BucketExists.cc)
-TARGET_LINK_LIBRARIES(BucketExists miniocpp ${S3_LIBS})
+add_executable(ListBuckets ListBuckets.cc)
+target_link_libraries(ListBuckets miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(ListBuckets ListBuckets.cc)
-TARGET_LINK_LIBRARIES(ListBuckets miniocpp ${S3_LIBS})
+add_executable(StatObject StatObject.cc)
+target_link_libraries(StatObject miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(StatObject StatObject.cc)
-TARGET_LINK_LIBRARIES(StatObject miniocpp ${S3_LIBS})
+add_executable(RemoveObject RemoveObject.cc)
+target_link_libraries(RemoveObject miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(RemoveObject RemoveObject.cc)
-TARGET_LINK_LIBRARIES(RemoveObject miniocpp ${S3_LIBS})
+add_executable(DownloadObject DownloadObject.cc)
+target_link_libraries(DownloadObject miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DownloadObject DownloadObject.cc)
-TARGET_LINK_LIBRARIES(DownloadObject miniocpp ${S3_LIBS})
+add_executable(UploadObject UploadObject.cc)
+target_link_libraries(UploadObject miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(UploadObject UploadObject.cc)
-TARGET_LINK_LIBRARIES(UploadObject miniocpp ${S3_LIBS})
+add_executable(GetObject GetObject.cc)
+target_link_libraries(GetObject miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetObject GetObject.cc)
-TARGET_LINK_LIBRARIES(GetObject miniocpp ${S3_LIBS})
+add_executable(ListObjects ListObjects.cc)
+target_link_libraries(ListObjects miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(ListObjects ListObjects.cc)
-TARGET_LINK_LIBRARIES(ListObjects miniocpp ${S3_LIBS})
+add_executable(PutObject PutObject.cc)
+target_link_libraries(PutObject miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(PutObject PutObject.cc)
-TARGET_LINK_LIBRARIES(PutObject miniocpp ${S3_LIBS})
+add_executable(CopyObject CopyObject.cc)
+target_link_libraries(CopyObject miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(CopyObject CopyObject.cc)
-TARGET_LINK_LIBRARIES(CopyObject miniocpp ${S3_LIBS})
+add_executable(ComposeObject ComposeObject.cc)
+target_link_libraries(ComposeObject miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(ComposeObject ComposeObject.cc)
-TARGET_LINK_LIBRARIES(ComposeObject miniocpp ${S3_LIBS})
+add_executable(RemoveObjects RemoveObjects.cc)
+target_link_libraries(RemoveObjects miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(RemoveObjects RemoveObjects.cc)
-TARGET_LINK_LIBRARIES(RemoveObjects miniocpp ${S3_LIBS})
+add_executable(SelectObjectContent SelectObjectContent.cc)
+target_link_libraries(SelectObjectContent miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SelectObjectContent SelectObjectContent.cc)
-TARGET_LINK_LIBRARIES(SelectObjectContent miniocpp ${S3_LIBS})
+add_executable(ListenBucketNotification ListenBucketNotification.cc)
+target_link_libraries(ListenBucketNotification miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(ListenBucketNotification ListenBucketNotification.cc)
-TARGET_LINK_LIBRARIES(ListenBucketNotification miniocpp ${S3_LIBS})
+add_executable(DeleteBucketPolicy DeleteBucketPolicy.cc)
+target_link_libraries(DeleteBucketPolicy miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DeleteBucketPolicy DeleteBucketPolicy.cc)
-TARGET_LINK_LIBRARIES(DeleteBucketPolicy miniocpp ${S3_LIBS})
+add_executable(GetBucketPolicy GetBucketPolicy.cc)
+target_link_libraries(GetBucketPolicy miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetBucketPolicy GetBucketPolicy.cc)
-TARGET_LINK_LIBRARIES(GetBucketPolicy miniocpp ${S3_LIBS})
+add_executable(SetBucketPolicy SetBucketPolicy.cc)
+target_link_libraries(SetBucketPolicy miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetBucketPolicy SetBucketPolicy.cc)
-TARGET_LINK_LIBRARIES(SetBucketPolicy miniocpp ${S3_LIBS})
+add_executable(DeleteBucketNotification DeleteBucketNotification.cc)
+target_link_libraries(DeleteBucketNotification miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DeleteBucketNotification DeleteBucketNotification.cc)
-TARGET_LINK_LIBRARIES(DeleteBucketNotification miniocpp ${S3_LIBS})
+add_executable(GetBucketNotification GetBucketNotification.cc)
+target_link_libraries(GetBucketNotification miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetBucketNotification GetBucketNotification.cc)
-TARGET_LINK_LIBRARIES(GetBucketNotification miniocpp ${S3_LIBS})
+add_executable(SetBucketNotification SetBucketNotification.cc)
+target_link_libraries(SetBucketNotification miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetBucketNotification SetBucketNotification.cc)
-TARGET_LINK_LIBRARIES(SetBucketNotification miniocpp ${S3_LIBS})
+add_executable(DeleteBucketEncryption DeleteBucketEncryption.cc)
+target_link_libraries(DeleteBucketEncryption miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DeleteBucketEncryption DeleteBucketEncryption.cc)
-TARGET_LINK_LIBRARIES(DeleteBucketEncryption miniocpp ${S3_LIBS})
+add_executable(GetBucketEncryption GetBucketEncryption.cc)
+target_link_libraries(GetBucketEncryption miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetBucketEncryption GetBucketEncryption.cc)
-TARGET_LINK_LIBRARIES(GetBucketEncryption miniocpp ${S3_LIBS})
+add_executable(SetBucketEncryption SetBucketEncryption.cc)
+target_link_libraries(SetBucketEncryption miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetBucketEncryption SetBucketEncryption.cc)
-TARGET_LINK_LIBRARIES(SetBucketEncryption miniocpp ${S3_LIBS})
+add_executable(GetBucketVersioning GetBucketVersioning.cc)
+target_link_libraries(GetBucketVersioning miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetBucketVersioning GetBucketVersioning.cc)
-TARGET_LINK_LIBRARIES(GetBucketVersioning miniocpp ${S3_LIBS})
+add_executable(SetBucketVersioning SetBucketVersioning.cc)
+target_link_libraries(SetBucketVersioning miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetBucketVersioning SetBucketVersioning.cc)
-TARGET_LINK_LIBRARIES(SetBucketVersioning miniocpp ${S3_LIBS})
+add_executable(DeleteBucketReplication DeleteBucketReplication.cc)
+target_link_libraries(DeleteBucketReplication miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DeleteBucketReplication DeleteBucketReplication.cc)
-TARGET_LINK_LIBRARIES(DeleteBucketReplication miniocpp ${S3_LIBS})
+add_executable(GetBucketReplication GetBucketReplication.cc)
+target_link_libraries(GetBucketReplication miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetBucketReplication GetBucketReplication.cc)
-TARGET_LINK_LIBRARIES(GetBucketReplication miniocpp ${S3_LIBS})
+add_executable(SetBucketReplication SetBucketReplication.cc)
+target_link_libraries(SetBucketReplication miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetBucketReplication SetBucketReplication.cc)
-TARGET_LINK_LIBRARIES(SetBucketReplication miniocpp ${S3_LIBS})
+add_executable(DeleteBucketLifecycle DeleteBucketLifecycle.cc)
+target_link_libraries(DeleteBucketLifecycle miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DeleteBucketLifecycle DeleteBucketLifecycle.cc)
-TARGET_LINK_LIBRARIES(DeleteBucketLifecycle miniocpp ${S3_LIBS})
+add_executable(GetBucketLifecycle GetBucketLifecycle.cc)
+target_link_libraries(GetBucketLifecycle miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetBucketLifecycle GetBucketLifecycle.cc)
-TARGET_LINK_LIBRARIES(GetBucketLifecycle miniocpp ${S3_LIBS})
+add_executable(SetBucketLifecycle SetBucketLifecycle.cc)
+target_link_libraries(SetBucketLifecycle miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetBucketLifecycle SetBucketLifecycle.cc)
-TARGET_LINK_LIBRARIES(SetBucketLifecycle miniocpp ${S3_LIBS})
+add_executable(DeleteBucketTags DeleteBucketTags.cc)
+target_link_libraries(DeleteBucketTags miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DeleteBucketTags DeleteBucketTags.cc)
-TARGET_LINK_LIBRARIES(DeleteBucketTags miniocpp ${S3_LIBS})
+add_executable(GetBucketTags GetBucketTags.cc)
+target_link_libraries(GetBucketTags miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetBucketTags GetBucketTags.cc)
-TARGET_LINK_LIBRARIES(GetBucketTags miniocpp ${S3_LIBS})
+add_executable(SetBucketTags SetBucketTags.cc)
+target_link_libraries(SetBucketTags miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetBucketTags SetBucketTags.cc)
-TARGET_LINK_LIBRARIES(SetBucketTags miniocpp ${S3_LIBS})
+add_executable(DeleteObjectLockConfig DeleteObjectLockConfig.cc)
+target_link_libraries(DeleteObjectLockConfig miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DeleteObjectLockConfig DeleteObjectLockConfig.cc)
-TARGET_LINK_LIBRARIES(DeleteObjectLockConfig miniocpp ${S3_LIBS})
+add_executable(GetObjectLockConfig GetObjectLockConfig.cc)
+target_link_libraries(GetObjectLockConfig miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetObjectLockConfig GetObjectLockConfig.cc)
-TARGET_LINK_LIBRARIES(GetObjectLockConfig miniocpp ${S3_LIBS})
+add_executable(SetObjectLockConfig SetObjectLockConfig.cc)
+target_link_libraries(SetObjectLockConfig miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetObjectLockConfig SetObjectLockConfig.cc)
-TARGET_LINK_LIBRARIES(SetObjectLockConfig miniocpp ${S3_LIBS})
+add_executable(DeleteObjectTags DeleteObjectTags.cc)
+target_link_libraries(DeleteObjectTags miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DeleteObjectTags DeleteObjectTags.cc)
-TARGET_LINK_LIBRARIES(DeleteObjectTags miniocpp ${S3_LIBS})
+add_executable(GetObjectTags GetObjectTags.cc)
+target_link_libraries(GetObjectTags miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetObjectTags GetObjectTags.cc)
-TARGET_LINK_LIBRARIES(GetObjectTags miniocpp ${S3_LIBS})
+add_executable(SetObjectTags SetObjectTags.cc)
+target_link_libraries(SetObjectTags miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetObjectTags SetObjectTags.cc)
-TARGET_LINK_LIBRARIES(SetObjectTags miniocpp ${S3_LIBS})
+add_executable(DisableObjectLegalHold DisableObjectLegalHold.cc)
+target_link_libraries(DisableObjectLegalHold miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(DisableObjectLegalHold DisableObjectLegalHold.cc)
-TARGET_LINK_LIBRARIES(DisableObjectLegalHold miniocpp ${S3_LIBS})
+add_executable(EnableObjectLegalHold EnableObjectLegalHold.cc)
+target_link_libraries(EnableObjectLegalHold miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(EnableObjectLegalHold EnableObjectLegalHold.cc)
-TARGET_LINK_LIBRARIES(EnableObjectLegalHold miniocpp ${S3_LIBS})
+add_executable(IsObjectLegalHoldEnabled IsObjectLegalHoldEnabled.cc)
+target_link_libraries(IsObjectLegalHoldEnabled miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(IsObjectLegalHoldEnabled IsObjectLegalHoldEnabled.cc)
-TARGET_LINK_LIBRARIES(IsObjectLegalHoldEnabled miniocpp ${S3_LIBS})
+add_executable(GetObjectRetention GetObjectRetention.cc)
+target_link_libraries(GetObjectRetention miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetObjectRetention GetObjectRetention.cc)
-TARGET_LINK_LIBRARIES(GetObjectRetention miniocpp ${S3_LIBS})
+add_executable(SetObjectRetention SetObjectRetention.cc)
+target_link_libraries(SetObjectRetention miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(SetObjectRetention SetObjectRetention.cc)
-TARGET_LINK_LIBRARIES(SetObjectRetention miniocpp ${S3_LIBS})
+add_executable(GetPresignedObjectUrl GetPresignedObjectUrl.cc)
+target_link_libraries(GetPresignedObjectUrl miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetPresignedObjectUrl GetPresignedObjectUrl.cc)
-TARGET_LINK_LIBRARIES(GetPresignedObjectUrl miniocpp ${S3_LIBS})
+add_executable(GetPresignedPostFormData GetPresignedPostFormData.cc)
+target_link_libraries(GetPresignedPostFormData miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(GetPresignedPostFormData GetPresignedPostFormData.cc)
-TARGET_LINK_LIBRARIES(GetPresignedPostFormData miniocpp ${S3_LIBS})
+add_executable(PutObjectProgress PutObjectProgress.cc)
+target_link_libraries(PutObjectProgress miniocpp ${requiredlibs})
 
-ADD_EXECUTABLE(PutObjectProgress PutObjectProgress.cc)
-TARGET_LINK_LIBRARIES(PutObjectProgress miniocpp ${S3_LIBS})
-
-ADD_EXECUTABLE(GetObjectProgress GetObjectProgress.cc)
-TARGET_LINK_LIBRARIES(GetObjectProgress miniocpp ${S3_LIBS})
+add_executable(GetObjectProgress GetObjectProgress.cc)
+target_link_libraries(GetObjectProgress miniocpp ${requiredlibs})

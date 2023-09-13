@@ -13,9 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-project(miniocpp)
-
 cmake_minimum_required(VERSION 3.10)
+project(miniocpp VERSION 0.1.0 DESCRIPTION "MinIO C++ Client SDK for Amazon S3 Compatible Cloud Storage")
+include(GNUInstallDirs)
+
+# specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+# prohibit in-source-builds
+if("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}")
+  message(FATAL_ERROR "in-source builds are not allowed; you should create a separate directory for build files")
+endif()
 
 macro(set_globals)
   set(CMAKE_BUILD_TYPE_INIT Release)
@@ -28,35 +38,14 @@ macro(set_globals)
   set(CMAKE_MODULE_LINKER_FLAGS_COVERAGE "${CMAKE_MODULE_LINKER_FLAGS_DEBUG} --coverage")
 endmacro()
 
-# specify the C++ standard
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(requiredlibs)
 
-# prohibit in-source-builds
-IF (${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
-  MESSAGE(STATUS "In-source-builds are not allowed")
-  MESSAGE(STATUS "Clean your source directory (e.g. delete the CMakeCache.txt file)")
-  MESSAGE(FATAL_ERROR "Please create a separate build directory and call CMake again")
-ENDIF (${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
-
-# Look for required libraries
-SET(requiredlibs)
-
-IF(CMAKE_COMPILER_IS_GNUCC)
+if(CMAKE_COMPILER_IS_GNUCC)
   set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Werror")
-  IF(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 8.0 AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0 AND NOT MINGW)
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 8.0 AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0 AND NOT MINGW)
     list(APPEND requiredlibs stdc++fs)
-  ENDIF()
-ENDIF()
-
-find_package(CURL REQUIRED)
-IF(CURL_FOUND)
-  INCLUDE_DIRECTORIES(${CURL_INCLUDE_DIRS})
-  list(APPEND requiredlibs CURL::libcurl)
-ELSE(CURL_FOUND)
-  MESSAGE(FATAL_ERROR "Could not find the CURL library and development files.")
-ENDIF(CURL_FOUND)
+  endif()
+endif()
 
 find_package(unofficial-curlpp CONFIG REQUIRED)
 list(APPEND requiredlibs unofficial::curlpp::curlpp)
@@ -71,60 +60,54 @@ find_package(pugixml CONFIG REQUIRED)
 list(APPEND requiredlibs pugixml)
 
 find_package(OpenSSL REQUIRED)
-IF(OPENSSL_FOUND)
-  INCLUDE_DIRECTORIES(${OPENSSL_INCLUDE_DIR})
+if(OPENSSL_FOUND)
+  include_directories(${OPENSSL_INCLUDE_DIR})
   list(APPEND requiredlibs OpenSSL::SSL OpenSSL::Crypto) # bugfix, because libcrypto is not found automatically
-ELSE(OPENSSL_FOUND)
-  MESSAGE(FATAL_ERROR "Could not find the OpenSSL library and development files.")
-ENDIF(OPENSSL_FOUND)
+else()
+  message(FATAL_ERROR "unable to find OpenSSL development and library files")
+endif()
 
-message(STATUS "Found required libs: ${requiredlibs}")
+message(STATUS "Required libraries found: ${requiredlibs}")
 
-INCLUDE (CheckIncludeFiles)
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-SET(MINIOCPP_MAJOR_VERSION "0")
-SET(MINIOCPP_MINOR_VERSION "1")
-SET(MINIOCPP_PATCH_VERSION "0")
+include(CheckIncludeFiles)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_subdirectory(include)
 add_subdirectory(src)
 
 option(BUILD_EXAMPLES "Build examples" ON)
-if (BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif (BUILD_EXAMPLES)
+if(BUILD_EXAMPLES)
+  add_subdirectory(examples)
+endif()
 
 option(BUILD_TESTS "Build tests" ON)
-if (BUILD_TESTS)
-    add_subdirectory(tests)
-endif (BUILD_TESTS)
+if(BUILD_TESTS)
+  add_subdirectory(tests)
+endif()
 
 option(BUILD_DOC "Build documentation" ON)
-
-if (BUILD_DOC)
+if(BUILD_DOC)
   # check if Doxygen is installed
   find_package(Doxygen)
-  if (DOXYGEN_FOUND)
-      # set input and output files
-      set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
-      set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+  if(DOXYGEN_FOUND)
+    # set input and output files
+    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
+    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
-      # request to configure the file
-      configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-      message("Doxygen build started")
+    # request to configure the file
+    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+    message("Doxygen build started")
 
-      # note the option ALL which allows to build the docs together with the application
-      add_custom_target(doc_doxygen ALL
-          COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-          WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-          COMMENT "Generating API documentation with Doxygen"
-          VERBATIM )
-  else (DOXYGEN_FOUND)
-    message("Doxygen need to be installed to generate the doxygen documentation")
-  endif (DOXYGEN_FOUND)
+    # note the option ALL which allows to build the docs together with the application
+    add_custom_target(doc_doxygen ALL
+      COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      COMMENT "Generating API documentation with Doxygen"
+      VERBATIM)
+  else(DOXYGEN_FOUND)
+    message(WARNING "Doxygen not found; install it to generate documentation")
+  endif(DOXYGEN_FOUND)
 endif(BUILD_DOC)
 
 configure_file(miniocpp.pc.in miniocpp.pc @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/miniocpp.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-
+install(FILES ${CMAKE_BINARY_DIR}/miniocpp.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
